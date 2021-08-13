@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autores</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row">
+            <h3>Detalle de Autores</h3>
+        </div>
+        <div class="row mt-5">    
+            <h2>{{autor.first_name}} {{autor.last_name}}</h3>
+            <h3>Notas : {{autor.notas}}</h3>
+        </div>
+
+        <div class="row mt-5">    
+            <h3 class"mt-5">Libros :</h3>
+            <td>
+            {% for l in libros_a %}
+                    <li>{{l.titulo}}  ({{l.id}})</td>
+            {% endfor %}
+            </td>
+        </div>
+
+        <div class="row mt-5">
+            <div class="col-sm-12 col-lg-6">
+                <form action="agregar_libro/" method="POST">
+                    {% csrf_token %}
+                    <input id="autor--id" name="autor-id" type="hidden" value="{{autor.id}}">
+                    <div class="mb-3">
+                        <select class="form-select" name="libro-id">
+                            <option selected>Seleccione un Libro</option>
+                            {% for l in libros_d %}
+                                <option value="{{l.id}}">{{l.titulo}} {{l.descri}} ({{l.id}})</option>
+                            {% endfor %}
+                            </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Agrega Libro</button>
+                </form>
+            </div>
+        </div>
+
+
+    </div>    
+    <link rel="stylesheet" href="{% static 'css/bootstrap.bundle.min.js' %}">    
+</body>
+</html>
